@@ -12,3 +12,6 @@ https://www.luiztools.com.br/post/criando-um-chat-com-nodejs-e-socketio/?utm_sou
 > express -e --git *nome do projeto*
 
 > npm install -S socket.io
+
+--referencia utilização de aquivos ejs
+https://www.digitalocean.com/community/tutorials/how-to-use-ejs-to-template-your-node-application-pt
