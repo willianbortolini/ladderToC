@@ -1,11 +1,95 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h3>Novo projeto</h3>
+  <ul>
+    <% for(var i=0; i<pessoas.length; i++) {%>
+        <li>
+            Nome: <%= pessoas[i].nome %>
+        </li>
+        <li>
+            Idade: <%= pessoas[i].idade %>
+            <br>
+            <br>
+        </li>
+        <% } %>
+</ul>>
+  <div class="project">
+    <div class="blocks">
+      <table class="tableBlocks">
+        <tr>
+          <td>
+            <div class="block" draggable="true"><img src="/images/blocks/open.png"><select name="port" id="">
+              
+                
+              </select></div>
+          </td>
+          <td>
+            <div class="block" draggable="true"><img src="/images/blocks/close.png"></div>
+          </td>
+          <td>
+            <div class="block" draggable="true"><img src="/images/blocks/pulse.png"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="block" draggable="true"><img src="/images/blocks/pulseDown.png"></div>
+          </td>
+          <td>
+            <div class="block" draggable="true"><img src="/images/blocks/line.png"></div>
+          </td>
+          <td>
+            <div class="block" draggable="true"><img src="/images/blocks/lineUp.png"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="block" draggable="true"><img src="/images/blocks/coil.png"></div>
+          </td>
+          <td>
+            <div class="block" draggable="true"><img src="/images/blocks/setCoil.png"></div>
+          </td>
+          <td>
+            <div class="block" draggable="true"><img src="/images/blocks/resetCoil.png"></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="program">
+      <table class="tableProgram">
+        <tr>
+          <td class="dropzone"></td>
+          <td class="dropzone"></td>
+          <td class="dropzone"></td>
+          <td class="dropzone"></td>
+          <td class="dropzone"></td>
+          <td class="dropzone"></td>
+          <td class="dropzone"></td>
+        </tr>
+        <tr>
+          <td class="dropzone"></td>
+          <td class="dropzone"></td>
+          <td class="dropzone"></td>
+          <td class="dropzone"></td>
+          <td class="dropzone"></td>
+          <td class="dropzone"></td>
+          <td class="dropzone"></td>
+        </tr>
+      </table>
+    </div>
+
+
+    <div class="code">code</div>
+  </div>
+</body>
+<script src="/javascripts/base.js" defer></script>
+
 </html>
