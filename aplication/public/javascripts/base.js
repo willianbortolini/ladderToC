@@ -27,21 +27,29 @@ function compile() {
         for (j = 0; j < colunas.length; j++) {
             elementos = colunas[j].childNodes;
             for (l = 0; l < elementos.length; l++) {
-                log(elementos)
                 var typeBlock = elementos[l].getAttribute('ladderType')
-                if (typeBlock) {
-                    $(".code").append('element: ' + typeBlock +'c:'+l)
+                if (typeBlock) {                    
+                    //$(".code").append('element: ' + typeBlock +' l:'+i +' c:'+ j)
                 }
                 //log(elementos[l].getAttribute('ladderType'))
                 var e = elementos[l].getElementsByClassName('ls-select')
                 try {
                     var value = e[0].options[e[0].selectedIndex].value;
-                    $(".code").append(' | port:' + value)
+                    //$(".code").append(' | port:' + value)
                 } catch (error) {
 
                 }
                 if (typeBlock) {
-                    $(".code").append('<br>')
+                    //$(".code").append('<br>')
+                }
+                if(typeBlock == 'c'){
+                    $(".code").append('if(!'+value+'){' )
+                }
+                if(typeBlock == 'o'){
+                    $(".code").append('if('+value+'){' )
+                }
+                if(typeBlock == 'coil'){
+                    $(".code").append('digitalWrite(HIGH,'+value+');}else{digitalWrite(LOW,'+value+');}' )
                 }
             }
         }

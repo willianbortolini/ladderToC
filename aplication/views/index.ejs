@@ -94,7 +94,7 @@
         </tr>
         <tr>
           <td>
-            <div class="block" ladderType='c' draggable="true"><img src="/images/blocks/coil.png">
+            <div class="block" ladderType='coil' draggable="true"><img src="/images/blocks/coil.png">
               <select name="select-simples-placeholder" class="ls-select">
                 <% for(var i=0; i<outputs.length; i++) {%>
                   <option value="<%= outputs[i].port %>">
@@ -105,7 +105,7 @@
             </div>
           </td>
           <td>
-            <div class="block" ladderType='sc' draggable="true"><img src="/images/blocks/setCoil.png">
+            <div class="block" ladderType='scoil' draggable="true"><img src="/images/blocks/setCoil.png">
               <select name="select-simples-placeholder" class="ls-select">
                 <% for(var i=0; i<outputs.length; i++) {%>
                   <option value="<%= outputs[i].port %>">
@@ -116,7 +116,7 @@
             </div>
           </td>
           <td>
-            <div class="block" ladderType='rc' draggable="true"><img src="/images/blocks/resetCoil.png">
+            <div class="block" ladderType='rcoil' draggable="true"><img src="/images/blocks/resetCoil.png">
               <select name="select-simples-placeholder" class="ls-select">
                 <% for(var i=0; i<outputs.length; i++) {%>
                   <option value="<%= outputs[i].port %>">
