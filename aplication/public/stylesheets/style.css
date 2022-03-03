@@ -5,52 +5,74 @@ body {
 a {
   color: #00B7FF;
 }
-.project{
+
+.project {
   display: flex;
   height: 90vh;
   width: 95vw;
 }
 
-.blocks{
+.blocks {
   height: 100%;
   background-color: #ffffff;
   border: 1px solid rgb(82, 146, 214);
 }
 
-.program{
-  overflow:auto; 
+.program {
+  overflow: auto;
   height: 100%;
   background-color: #ffffff;
   border: 1px solid rgb(82, 146, 214);
-  
+
 }
 
-.program table{
+.program table {
   border-spacing: 0;
   border-collapse: collapse;
 }
-.code{
+
+.code {
   height: 100%;
   width: 40%;
   background-color: #ffffff;
   border: 1px solid rgb(82, 146, 214);
 }
 
-.tableProgram td{
-  border: 1px dashed skyblue;
-  width: 70px;
-  height: 70px;  
-}
-
-.tableBlocks td{
+.tableProgram td {
+  vertical-align: top;
   border: 1px dashed skyblue;
   width: 70px;
   height: 70px;
 }
 
-.is-dragging{
+.tableBlocks td {
+  border: 1px dashed skyblue;
+  width: 70px;
+  height: 70px;
 }
 
-.dropzone{
+.is-dragging {}
+
+.dropzone {
   padding: 0%;
+}
+
+.ls-select {
+  width: 70px;
+  text-align-last: center;
+  font-size: 0.9em;
+}
+
+.select2-selection__rendered {
+  text-align-last: center;
+  font-size: 0.9em;
+}
+
+.dropzone .removeBlock{
+  display:none;
+}
+
+.withBlock .removeBlock{
+  cursor: pointer;
+  display:flex;
 }

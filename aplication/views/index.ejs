@@ -3,85 +3,157 @@
 
 <head>
   <title>
-    <%= title %>
+    teste
   </title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
 </head>
 
 <body>
-  <h3>Novo projeto</h3>
-  <ul>
-    <% for(var i=0; i<pessoas.length; i++) {%>
-        <li>
-            Nome: <%= pessoas[i].nome %>
-        </li>
-        <li>
-            Idade: <%= pessoas[i].idade %>
-            <br>
-            <br>
-        </li>
-        <% } %>
-</ul>>
+  <h3 id="titulo">Novo projeto</h3>
   <div class="project">
     <div class="blocks">
       <table class="tableBlocks">
         <tr>
           <td>
-            <div class="block" draggable="true"><img src="/images/blocks/open.png"><select name="port" id="">
-              
-                
-              </select></div>
+            <div class="block" ladderType='o' draggable="true"><img src="/images/blocks/open.png">
+              <select name="select-simples-placeholder" class="ls-select">
+                <% for(var i=0; i<inputs.length; i++) {%>
+                  <option value="<%= inputs[i].port %>">
+                    <%= inputs[i].name %>
+                  </option>
+                  <% } %>
+                    <% for(var i=0; i<outputs.length; i++) {%>
+                      <option value="<%= outputs[i].port %>">
+                        <%= outputs[i].name %>
+                      </option>
+                      <% } %>
+              </select>
+            </div>
           </td>
           <td>
-            <div class="block" draggable="true"><img src="/images/blocks/close.png"></div>
+            <div class="block" ladderType='c' draggable="true"><img src="/images/blocks/close.png">
+              <select name="select-simples-placeholder" class="ls-select">
+                <% for(var i=0; i<inputs.length; i++) {%>
+                  <option value="<%= inputs[i].port %>">
+                    <%= inputs[i].name %>
+                  </option>
+                  <% } %>
+                    <% for(var i=0; i<outputs.length; i++) {%>
+                      <option value="<%= outputs[i].port %>">
+                        <%= outputs[i].name %>
+                      </option>
+                      <% } %>
+              </select>
+            </div>
           </td>
           <td>
-            <div class="block" draggable="true"><img src="/images/blocks/pulse.png"></div>
+            <div class="block" ladderType='p' draggable="true"><img src="/images/blocks/pulse.png">
+              <select name="select-simples-placeholder" class="ls-select">
+                <% for(var i=0; i<inputs.length; i++) {%>
+                  <option value="<%= inputs[i].port %>">
+                    <%= inputs[i].name %>
+                  </option>
+                  <% } %>
+                    <% for(var i=0; i<outputs.length; i++) {%>
+                      <option value="<%= outputs[i].port %>">
+                        <%= outputs[i].name %>
+                      </option>
+                      <% } %>
+              </select>
+            </div>
           </td>
         </tr>
         <tr>
           <td>
-            <div class="block" draggable="true"><img src="/images/blocks/pulseDown.png"></div>
+            <div class="block" ladderType='pd' draggable="true"><img src="/images/blocks/pulseDown.png">
+              <select name="select-simples-placeholder" class="ls-select">
+                <% for(var i=0; i<inputs.length; i++) {%>
+                  <option value="<%= inputs[i].port %>">
+                    <%= inputs[i].name %>
+                  </option>
+                  <% } %>
+                    <% for(var i=0; i<outputs.length; i++) {%>
+                      <option value="<%= outputs[i].port %>">
+                        <%= outputs[i].name %>
+                      </option>
+                      <% } %>
+              </select>
+            </div>
           </td>
           <td>
-            <div class="block" draggable="true"><img src="/images/blocks/line.png"></div>
+            <div class="block" ladderType='l' draggable="true"><img src="/images/blocks/line.png"></div>
           </td>
           <td>
-            <div class="block" draggable="true"><img src="/images/blocks/lineUp.png"></div>
+            <div class="block" ladderType='lu' draggable="true"><img src="/images/blocks/lineUp.png"></div>
           </td>
         </tr>
         <tr>
           <td>
-            <div class="block" draggable="true"><img src="/images/blocks/coil.png"></div>
+            <div class="block" ladderType='c' draggable="true"><img src="/images/blocks/coil.png">
+              <select name="select-simples-placeholder" class="ls-select">
+                <% for(var i=0; i<outputs.length; i++) {%>
+                  <option value="<%= outputs[i].port %>">
+                    <%= outputs[i].name %>
+                  </option>
+                  <% } %>
+              </select>
+            </div>
           </td>
           <td>
-            <div class="block" draggable="true"><img src="/images/blocks/setCoil.png"></div>
+            <div class="block" ladderType='sc' draggable="true"><img src="/images/blocks/setCoil.png">
+              <select name="select-simples-placeholder" class="ls-select">
+                <% for(var i=0; i<outputs.length; i++) {%>
+                  <option value="<%= outputs[i].port %>">
+                    <%= outputs[i].name %>
+                  </option>
+                  <% } %>
+              </select>
+            </div>
           </td>
           <td>
-            <div class="block" draggable="true"><img src="/images/blocks/resetCoil.png"></div>
+            <div class="block" ladderType='rc' draggable="true"><img src="/images/blocks/resetCoil.png">
+              <select name="select-simples-placeholder" class="ls-select">
+                <% for(var i=0; i<outputs.length; i++) {%>
+                  <option value="<%= outputs[i].port %>">
+                    <%= outputs[i].name %>
+                  </option>
+                  <% } %>
+              </select>
+            </div>
           </td>
         </tr>
       </table>
     </div>
-    <div class="program">
-      <table class="tableProgram">
+    <div  class="program">
+      <table id="program" class="tableProgram">
         <tr>
-          <td class="dropzone"></td>
-          <td class="dropzone"></td>
-          <td class="dropzone"></td>
-          <td class="dropzone"></td>
-          <td class="dropzone"></td>
-          <td class="dropzone"></td>
-          <td class="dropzone"></td>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
         </tr>
         <tr>
-          <td class="dropzone"></td>
-          <td class="dropzone"></td>
-          <td class="dropzone"></td>
-          <td class="dropzone"></td>
-          <td class="dropzone"></td>
-          <td class="dropzone"></td>
-          <td class="dropzone"></td>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
+        </tr>
+        <tr>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
+          <td class="dropzone"><div class="removeBlock" onclick="removeBlock(this)">X</div></td>
         </tr>
       </table>
     </div>
@@ -90,6 +162,7 @@
     <div class="code">code</div>
   </div>
 </body>
+
 <script src="/javascripts/base.js" defer></script>
 
 </html>
