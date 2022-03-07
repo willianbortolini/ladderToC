@@ -1,5 +1,8 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: Roboto;
 }
 
 a {
@@ -7,6 +10,7 @@ a {
 }
 
 .project {
+  margin: 40px 18px 15px 18px;
   display: flex;
   height: 90vh;
   width: 95vw;
@@ -15,15 +19,72 @@ a {
 .blocks {
   height: 100%;
   background-color: #ffffff;
-  border: 1px solid rgb(82, 146, 214);
 }
 
-.program {
-  overflow: auto;
+.program {  
   height: 100%;
   background-color: #ffffff;
-  border: 1px solid rgb(82, 146, 214);
+}
 
+.codLadder{
+  overflow: auto;
+  height: 100%;
+}
+
+.headerApp {
+  padding-left: 14px;
+  background-color: #1273CD;
+  color: white;
+  height: 33px;
+  font-family: Roboto;
+  font-size: 14px;
+  display: flex;
+  align-content: stretch;
+  align-items: center;
+}
+
+.projectName {
+  font-size: 14px;
+  position: relative;
+  margin-right: 20px;
+}
+
+.color-blue {
+  color: #1273CD;
+}
+
+button {
+  padding: 9px 14px;
+  margin: 0px 8px;
+  cursor: pointer;
+  height: 36px;
+  border: none;
+  background-color: #E5E5E5;
+  font-size: 16px;
+  color: #1273CD;
+  font-weight: 500;
+}
+
+.projectName::after {
+  content: " ";
+  display: block;
+  height: 1px;
+  background: #1273CD;
+  left: 100%;
+}
+
+.secondHeader {
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.secondHeader .left-buttons {
+  display: flex;
+}
+
+.secondHeader .rigth-buttons {
+  display: flex;
 }
 
 .program table {
@@ -36,8 +97,8 @@ a {
   height: 80%;
   width: 100%;
   background-color: #ffffff;
-  border: 1px solid rgb(82, 146, 214);
 }
+
 .logs {
   overflow: auto;
   height: 20%;
@@ -46,7 +107,7 @@ a {
   border: 1px solid rgb(82, 146, 214);
 }
 
-.decoder{
+.decoder {
   height: 100%;
   width: 40%;
   background-color: #ffffff;
@@ -56,32 +117,53 @@ a {
 .tableProgram td {
   vertical-align: top;
   border: 1px dashed skyblue;
-  width: 70px;
-  height: 70px;
+  width: 90px;
+  height: 116px;
+  position: relative;
 }
 
 .tableBlocks td {
-  border: 1px dashed skyblue;
-  width: 70px;
-  height: 70px;
+  margin: 3px;
+  width: 90px;
+  height: 116px;
+  border: 1px solid rgba(18, 115, 205, 0.5);
+  position: relative;
 }
 
-.is-dragging {}
+.tableBlocks {
+  
+  padding:3px;
+  background-color: #00000010;
+}
+
+.is-dragging {
+
+}
 
 .dropzone {
   padding: 0%;
 }
 
 .ls-select {
-  width: 70px;
+  width: -webkit-fill-available;
+  margin:2px;
   text-align-last: center;
-  font-size: 0.9em;
+  font-size: 1em;
+  border: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
 input[type="number"] {
-  width: 60px;
+  width: 65px;
+  margin:2px;
   text-align-last: center;
-  font-size: 0.9em;
+  font-size: 1em;
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 1px;
 }
 
 .select2-selection__rendered {
@@ -89,16 +171,17 @@ input[type="number"] {
   font-size: 0.9em;
 }
 
-.dropzone .removeBlock{
-  display:none;
+.dropzone .removeBlock {
+  display: none;
 }
 
-.withBlock .removeBlock{
+.withBlock .removeBlock {
   cursor: pointer;
-  display:flex;
+  display: flex;
+  z-index: 1;
 }
 
-.blockError{
+.blockError {
   padding: 5px;
   background-color: red;
 }

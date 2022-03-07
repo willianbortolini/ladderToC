@@ -15,3 +15,6 @@ https://www.luiztools.com.br/post/criando-um-chat-com-nodejs-e-socketio/?utm_sou
 
 --referencia utilização de aquivos ejs
 https://www.digitalocean.com/community/tutorials/how-to-use-ejs-to-template-your-node-application-pt
+
+Design by Leticia Bortolini:
+https://www.figma.com/file/hokVBAZnxZXW1jCxx51kt1/Untitled?node-id=1%3A2s

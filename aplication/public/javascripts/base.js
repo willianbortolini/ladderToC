@@ -39,119 +39,126 @@ function compile() {
             //codeString += "j="+j+"-"+i+" - "
             elementos = colunas[j].childNodes;
 
-            for (l = 0; l < elementos.length; l++) {
-                var typeBlock = elementos[l].getAttribute('ladderType')
-                var e = elementos[l].getElementsByClassName('ls-select')
-                try {
-                    var value = e[0].options[e[0].selectedIndex].value;
-                    var name = e[0].options[e[0].selectedIndex].text;
-                    if (j == 1) {
-                        lineString = "if(" + lineString
+            for (l = 3; l < 4; l++) {
+                try {                   
+                
+                var typeBlock = elementos[3].getAttribute('ladderType')
+                
+                    log("typeBlock")
+                    var e = elementos[3].getElementsByClassName('ls-select')
+                    try {
+                        var value = e[0].options[e[0].selectedIndex].value;
+                        var name = e[0].options[e[0].selectedIndex].text;
+                        if (j == 1) {
+                            lineString = "if(" + lineString
+                        }
+                    } catch (error) {
+                    }
+
+
+                    if (typeBlock == 'lu') {
+                        forLine(i - 1, j)
+                        line = i
+                    }
+                    if (typeBlock == 'o') {
+                        if (j > 1) {
+                            lineString += "&&"
+                        }
+                        if (!name.includes('T') && !name.includes('Out')) {
+                            ins.push(value)
+                        }
+                        if (name.includes('Out')) {
+                            lineString += "digitalRead(out" + value + ")"
+                        } else {
+                            lineString += "state" + value
+                        }
+
+                    }
+                    if (typeBlock == 'c') {
+                        if (j > 1) {
+                            lineString += "&&"
+                        }
+                        if (!name.includes('T') && !name.includes('Out')) {
+                            ins.push(value)
+                        }
+                        lineString += "!state" + value
+                    }
+                    if (typeBlock == 'p') {
+                        if (j > 1) {
+                            lineString += "&&"
+                        }
+                        insPulseIn.push(value)
+                        if (!name.includes('T') && !name.includes('Out')) {
+                            ins.push(value)
+                        }
+                        lineString += "pulseIn" + value
+                    }
+                    if (typeBlock == 'pc') {
+                        if (j > 1) {
+                            lineString += "&&"
+                        }
+                        insPulseIn.push(value)
+                        if (!name.includes('T') && !name.includes('Out')) {
+                            ins.push(value)
+                        }
+                        lineString += "!pulseIn" + value
+                    }
+                    if (typeBlock == 'pd') {
+                        if (j > 1) {
+                            lineString += "&&"
+                        }
+                        insPulseOut.push(value)
+                        if (!name.includes('T') && !name.includes('Out')) {
+                            ins.push(value)
+                        }
+                        lineString += "pulseDown" + value
+                    }
+                    if (typeBlock == 'pdc') {
+                        if (j > 1) {
+                            lineString += "&&"
+                        }
+                        insPulseOut.push(value)
+                        if (!name.includes('T') && !name.includes('Out')) {
+                            ins.push(value)
+                        }
+                        lineString += "!pulseDown" + value
+                    }
+                    if (elementos > 0) {
+                        elementos[3].classList.remove("blockError")
+                    }
+                    if (typeBlock == 'coil') {
+                        /*if (outs.indexOf(value) != -1 || sets.indexOf(value) != -1) {
+                            logs = 'Erro na linha:' + i + ' e coluna:' + 6 + "<br> Saída " + value + " ja foi usada anteriormente"
+                        } else {*/
+                        lineString += "){<br> state" + value + " = 1;<br>}"
+                        //}
+                        outs.push(value)
+                    }
+
+                    if (typeBlock == 'tcoil') {
+                        var quanTenpo = elementos[3].querySelectorAll('input[type=number]')[0].value
+                        lineString += "){<br> tempo" + value + " = 1;<br>}else{<br> tempocont" + value + " = millis() + " + quanTenpo + ";}<br>"
+                        times.push(value)
+                    }
+
+                    if (typeBlock == 'scoil') {
+                        /* if (outs.indexOf(value) != -1) {
+                             logs = 'Erro na linha:' + i + ' e coluna:' + 6 + "<br> Saída " + value + " ja foi usada anteriormente"
+                         } else {*/
+                        lineString += "){<br> state" + value + " = 1;<br>}"
+                        //}
+                        sets.push(value)
+                    }
+                    if (typeBlock == 'rcoil') {
+                        /*if (outs.indexOf(value) != -1) {
+                            logs = 'Erro na linha:' + i + ' e coluna:' + 6 + "<br> Saída " + value + " ja foi usada anteriormente"
+                        } else {*/
+                        lineString += "){<br> state" + value + " = 0;<br>}"
+                        //}
+                        sets.push(value)
                     }
                 } catch (error) {
-                }
-
-
-                if (typeBlock == 'lu') {
-                    forLine(i - 1, j)
-                    line = i
-                }
-                if (typeBlock == 'o') {
-                    if (j > 1) {
-                        lineString += "&&"
-                    }
-                    if (!name.includes('T') && !name.includes('Out')) {
-                        ins.push(value)
-                    }
-                    if(name.includes('Out')){
-                        lineString += "digitalRead(out" + value + ")"
-                    }else{
-                        lineString += "state" + value
-                    }
                     
-                }
-                if (typeBlock == 'c') {
-                    if (j > 1) {
-                        lineString += "&&"
-                    }
-                    if (!name.includes('T') && !name.includes('Out')) {
-                        ins.push(value)
-                    }
-                    lineString += "!state" + value
-                }
-                if (typeBlock == 'p') {
-                    if (j > 1) {
-                        lineString += "&&"
-                    }
-                    insPulseIn.push(value)
-                    if (!name.includes('T') && !name.includes('Out')) {
-                        ins.push(value)
-                    }
-                    lineString += "pulseIn" + value
-                }
-                if (typeBlock == 'pc') {
-                    if (j > 1) {
-                        lineString += "&&"
-                    }
-                    insPulseIn.push(value)
-                    if (!name.includes('T') && !name.includes('Out')) {
-                        ins.push(value)
-                    }
-                    lineString += "!pulseIn" + value
-                }
-                if (typeBlock == 'pd') {
-                    if (j > 1) {
-                        lineString += "&&"
-                    }
-                    insPulseOut.push(value)
-                    if (!name.includes('T') && !name.includes('Out')) {
-                        ins.push(value)
-                    }
-                    lineString += "pulseDown" + value
-                }
-                if (typeBlock == 'pdc') {
-                    if (j > 1) {
-                        lineString += "&&"
-                    }
-                    insPulseOut.push(value)
-                    if (!name.includes('T') && !name.includes('Out')) {
-                        ins.push(value)
-                    }
-                    lineString += "!pulseDown" + value
-                }
-                if (elementos > 0) {
-                    elementos[l].classList.remove("blockError")
-                }
-                if (typeBlock == 'coil') {
-                    /*if (outs.indexOf(value) != -1 || sets.indexOf(value) != -1) {
-                        logs = 'Erro na linha:' + i + ' e coluna:' + 6 + "<br> Saída " + value + " ja foi usada anteriormente"
-                    } else {*/
-                        lineString += "){<br> state" + value + " = 1;<br>}"
-                    //}
-                    outs.push(value)
-                }
-
-                if (typeBlock == 'tcoil') {
-                    var quanTenpo = elementos[l].querySelectorAll('input[type=number]')[0].value
-                    lineString += "){<br> tempo" + value + " = 1;<br>}else{<br> tempocont"+value+" = millis() + "+quanTenpo+";}<br>"
-                    times.push(value)
-                }
-
-                if (typeBlock == 'scoil') {
-                   /* if (outs.indexOf(value) != -1) {
-                        logs = 'Erro na linha:' + i + ' e coluna:' + 6 + "<br> Saída " + value + " ja foi usada anteriormente"
-                    } else {*/
-                        lineString += "){<br> state" + value + " = 1;<br>}"
-                    //}
-                    sets.push(value)
-                }
-                if (typeBlock == 'rcoil') {
-                    /*if (outs.indexOf(value) != -1) {
-                        logs = 'Erro na linha:' + i + ' e coluna:' + 6 + "<br> Saída " + value + " ja foi usada anteriormente"
-                    } else {*/
-                        lineString += "){<br> state" + value + " = 0;<br>}"
-                    //}
-                    sets.push(value)
                 }
             }
 
@@ -251,7 +258,7 @@ function drag() {
 
 }
 
-function dragend() {
+function dragend() {    
     dropzones.forEach(dropzone => dropzone.classList.remove('highlight'))
     this.classList.remove('is-dragging')
 }
@@ -300,7 +307,7 @@ function drop() {
 
 function removeBlock(este) {
     este.parentElement.classList.remove('withBlock')
-    este.nextSibling.remove()
+    este.nextSibling.nextSibling.remove()
     log('remove this block')
 }
 
