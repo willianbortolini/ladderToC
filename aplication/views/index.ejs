@@ -166,7 +166,7 @@
         </tr>
         <tr>
           <td>
-            <div class="block" ladderType='l' draggable="true"><img src="/images/blocks/line.png"></div>
+            <div class="block" id="l" ladderType='l' draggable="true"><img src="/images/blocks/line.png"></div>
           </td>
           <td>
             <div class="block" ladderType='lu' draggable="true"><img src="/images/blocks/upLine.png"></div>
@@ -230,7 +230,11 @@
       </table>
     </div>
     <div class="program">
-      <h3>Código em leader</h3>
+      <div class="flex-justify">
+        <h3>Código em leader</h3>
+        <button id="buttonConvert" class="button-blue" type="button" id="see"><span class="material-icons">login</span>
+          Converter </button>
+      </div>
       <div class="codLadder">
         <table id="program" class="tableProgram">
           <tr>
@@ -261,122 +265,158 @@
           </tr>
           <tr>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone onlyCoil">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
           </tr>
           <tr>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone onlyCoil">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
           </tr>
           <tr>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone onlyCoil">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
           </tr>
           <tr>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone onlyCoil">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
           </tr>
           <tr>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone onlyCoil">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
           </tr>
           <tr>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
             <td class="dropzone onlyCoil">
-              <div class="removeBlock" onclick="removeBlock(this)">X</div>
+              <div class="removeBlock" onclick="removeBlock(this)"><span class="material-icons color-blue">delete</span>
+              </div>
             </td>
           </tr>
           <tr>
@@ -410,9 +450,14 @@
     </div>
 
     <div class="decoder">
-      <h3>Código em C</h3>
-      <div class="code">code</div>
-      <div class="logs">logs</div>
+      <div class="flex-justify">
+        <h3>Código em C</h3>
+        <button id="buttonCopy" class="button-blue" type="button" id="see"><span class="material-icons">copy_all</span>
+          Copiar </button>
+      </div>
+      <div class="code" id="codeLadder"></div>
+      <h3>Logs de erros</h3>
+      <div class="logs"></div>
     </div>
 
   </div>

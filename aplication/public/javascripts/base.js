@@ -11,9 +11,19 @@ $(document).ready(function () {
 
 });
 
-const titulo = document.getElementById('titulo')
-titulo.addEventListener('click', click => {
+const bConvert = document.getElementById('buttonConvert')
+bConvert.addEventListener('click', click => {
     compile()
+})
+
+const bCopy = document.getElementById('buttonCopy')
+bCopy.addEventListener('click', click => {
+    var range = document.createRange();
+    range.selectNode(document.getElementById("codeLadder"));
+    window.getSelection().removeAllRanges(); // clear current selection
+    window.getSelection().addRange(range); // to select text
+    document.execCommand("copy");
+    window.getSelection().removeAllRanges();// to deselect
 })
 
 
@@ -30,7 +40,7 @@ function compile() {
     var times = []
     var lineString = ''
     var logs = ''
-
+    var lineWith = false;
     function forLine(i, nj = 0) {
 
         colunas = tabela.rows[i].childNodes;
@@ -40,11 +50,8 @@ function compile() {
             elementos = colunas[j].childNodes;
 
             for (l = 3; l < 4; l++) {
-                try {                   
-                
-                var typeBlock = elementos[3].getAttribute('ladderType')
-                
-                    log("typeBlock")
+                try {
+                    var typeBlock = elementos[3].getAttribute('ladderType')
                     var e = elementos[3].getElementsByClassName('ls-select')
                     try {
                         var value = e[0].options[e[0].selectedIndex].value;
@@ -54,7 +61,14 @@ function compile() {
                         }
                     } catch (error) {
                     }
-
+                    if (j == 1) {
+                        lineWith = true;
+                    }
+                    if (j == 11) {
+                        lineWith = false;
+                    }
+                    
+                    
 
                     if (typeBlock == 'lu') {
                         forLine(i - 1, j)
@@ -158,12 +172,17 @@ function compile() {
                         sets.push(value)
                     }
                 } catch (error) {
-                    
+                    if ((j == 3 || j == 5 || j == 7 || j == 9) && lineWith == true) {                        
+                        var blocoLinha = document.getElementById("l").cloneNode(true);
+                        elementos[0].parentElement.classList.add('withBlock')
+                        elementos[0].parentElement.append(blocoLinha)
+                    }
                 }
-            }
+            }          
 
             currentLine
         }
+        lineWith = false;
     }
 
     var tabela = document.getElementById('program');
@@ -258,7 +277,7 @@ function drag() {
 
 }
 
-function dragend() {    
+function dragend() {
     dropzones.forEach(dropzone => dropzone.classList.remove('highlight'))
     this.classList.remove('is-dragging')
 }
