@@ -1,7 +1,7 @@
 function log(message) {
     console.log(message)
 }
-
+var logs = ''
 const cards = document.querySelectorAll('.block')
 const dropzones = document.querySelectorAll('.dropzone')
 
@@ -15,6 +15,19 @@ const bConvert = document.getElementById('buttonConvert')
 bConvert.addEventListener('click', click => {
     compile()
 })
+
+const bSave = document.getElementById("save")
+bSave.addEventListener('click', click => {
+    var textos = $("#program").html()    
+    log(textos)
+    //$("#program").html(textos)
+})
+
+function erroLadder(elemento,mensagem){
+    $('.logs').append(mensagem);
+    elemento.parentElement.classList.add('blockError')
+}
+
 
 const bCopy = document.getElementById('buttonCopy')
 bCopy.addEventListener('click', click => {
@@ -39,8 +52,11 @@ function compile() {
     var sets = []
     var times = []
     var lineString = ''
-    var logs = ''
+    
     var lineWith = false;
+    var someInterrupt = false;
+    $('.logs').html("")
+
     function forLine(i, nj = 0) {
 
         colunas = tabela.rows[i].childNodes;
@@ -51,11 +67,14 @@ function compile() {
 
             for (l = 3; l < 4; l++) {
                 try {
+                    elementos[0].parentElement.classList.remove("blockError")
                     var typeBlock = elementos[3].getAttribute('ladderType')
                     var e = elementos[3].getElementsByClassName('ls-select')
                     try {
                         var value = e[0].options[e[0].selectedIndex].value;
                         var name = e[0].options[e[0].selectedIndex].text;
+                        e[0].options[e[0].selectedIndex].setAttribute('selected','selected')
+                        log(e[0].options[e[0].selectedIndex])
                         if (j == 1) {
                             lineString = "if(" + lineString
                         }
@@ -67,14 +86,15 @@ function compile() {
                     if (j == 11) {
                         lineWith = false;
                     }
-                    
-                    
+
+
 
                     if (typeBlock == 'lu') {
                         forLine(i - 1, j)
                         line = i
                     }
                     if (typeBlock == 'o') {
+                        someInterrupt = true;
                         if (j > 1) {
                             lineString += "&&"
                         }
@@ -89,6 +109,7 @@ function compile() {
 
                     }
                     if (typeBlock == 'c') {
+                        someInterrupt = true;
                         if (j > 1) {
                             lineString += "&&"
                         }
@@ -98,6 +119,7 @@ function compile() {
                         lineString += "!state" + value
                     }
                     if (typeBlock == 'p') {
+                        someInterrupt = true;
                         if (j > 1) {
                             lineString += "&&"
                         }
@@ -108,6 +130,7 @@ function compile() {
                         lineString += "pulseIn" + value
                     }
                     if (typeBlock == 'pc') {
+                        someInterrupt = true;
                         if (j > 1) {
                             lineString += "&&"
                         }
@@ -118,6 +141,7 @@ function compile() {
                         lineString += "!pulseIn" + value
                     }
                     if (typeBlock == 'pd') {
+                        someInterrupt = true;
                         if (j > 1) {
                             lineString += "&&"
                         }
@@ -128,6 +152,7 @@ function compile() {
                         lineString += "pulseDown" + value
                     }
                     if (typeBlock == 'pdc') {
+                        someInterrupt = true;
                         if (j > 1) {
                             lineString += "&&"
                         }
@@ -137,48 +162,71 @@ function compile() {
                         }
                         lineString += "!pulseDown" + value
                     }
-                    if (elementos > 0) {
-                        elementos[3].classList.remove("blockError")
-                    }
+
+
+
                     if (typeBlock == 'coil') {
-                        /*if (outs.indexOf(value) != -1 || sets.indexOf(value) != -1) {
-                            logs = 'Erro na linha:' + i + ' e coluna:' + 6 + "<br> Saída " + value + " ja foi usada anteriormente"
-                        } else {*/
-                        lineString += "){<br> state" + value + " = 1;<br>}"
-                        //}
+                        if (someInterrupt == false) {                            
+                            erroLadder(elementos[0],'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Saída " + value + " não possui nenhum acionamento")
+                        }
+                        someInterrupt = false;
+                        if (outs.indexOf(value) != -1) {
+                            erroLadder(elementos[0],'Erro na linha:' + (i + 1) + ' e coluna:6<br> Saída ' + value + ' ja foi usada anteriormente')                         
+                        } else {
+                            lineString += "){<br> state" + value + " = 1;<br>}"
+                            
+                        }
                         outs.push(value)
                     }
-
                     if (typeBlock == 'tcoil') {
-                        var quanTenpo = elementos[3].querySelectorAll('input[type=number]')[0].value
-                        lineString += "){<br> tempo" + value + " = 1;<br>}else{<br> tempocont" + value + " = millis() + " + quanTenpo + ";}<br>"
+                        if (someInterrupt == false) {
+                            erroLadder(elementos[0],'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Tempo " + value + " não possui nenhum acionamento")                            
+                        }
+                        someInterrupt = false;
+                        if (times.indexOf(value) != -1) {
+                            erroLadder(elementos[0],'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Tempo " + value + " ja foi usada anteriormente")
+                        } else {
+                            var quanTenpo = elementos[3].querySelectorAll('input[type=number]')[0].value
+                            lineString += "){<br> tempo" + value + " = 1;<br>}else{<br> tempocont" + value + " = millis() + " + quanTenpo + ";}<br>"
+                            
+                        }
                         times.push(value)
                     }
 
                     if (typeBlock == 'scoil') {
-                        /* if (outs.indexOf(value) != -1) {
-                             logs = 'Erro na linha:' + i + ' e coluna:' + 6 + "<br> Saída " + value + " ja foi usada anteriormente"
-                         } else {*/
-                        lineString += "){<br> state" + value + " = 1;<br>}"
-                        //}
+                        if (someInterrupt == false) {
+                            erroLadder(elementos[0],'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Saída " + value + " não possui nenhum acionamento")
+                        }
+                        someInterrupt = false;
+                        if (outs.indexOf(value) != -1) {
+                            erroLadder(elementos[0],'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Saída " + value + " ja foi usada anteriormente")
+                        } else {
+                            lineString += "){<br> state" + value + " = 1;<br>}"
+                            
+                        }
                         sets.push(value)
                     }
                     if (typeBlock == 'rcoil') {
-                        /*if (outs.indexOf(value) != -1) {
-                            logs = 'Erro na linha:' + i + ' e coluna:' + 6 + "<br> Saída " + value + " ja foi usada anteriormente"
-                        } else {*/
-                        lineString += "){<br> state" + value + " = 0;<br>}"
-                        //}
+                        if (someInterrupt == false) {
+                            erroLadder(elementos[0],'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Saída " + value + " não possui nenhum acionamento")
+                        }
+                        someInterrupt = false;
+                        if (outs.indexOf(value) != -1) {
+                            erroLadder(elementos[0],'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Saída " + value + " ja foi usada anteriormente")
+                        } else {
+                            lineString += "){<br> state" + value + " = 0;<br>}"
+                            
+                        }
                         sets.push(value)
                     }
                 } catch (error) {
-                    if ((j == 3 || j == 5 || j == 7 || j == 9) && lineWith == true) {                        
+                    if ((j == 3 || j == 5 || j == 7 || j == 9) && lineWith == true) {
                         var blocoLinha = document.getElementById("l").cloneNode(true);
                         elementos[0].parentElement.classList.add('withBlock')
                         elementos[0].parentElement.append(blocoLinha)
                     }
                 }
-            }          
+            }
 
             currentLine
         }
@@ -257,7 +305,7 @@ function compile() {
 
     setup += "}<br>"
     codeString = variaveis + setup + 'void loop(){<br>' + variaveisOnLoop + pulses + codeString + stringPos + "<br>}";
-    $('.logs').html(logs);
+    //$('.logs').html(logs);
     $(".code").append(codeString)
 }
 
