@@ -206,7 +206,6 @@ input[type="number"] {
 }
 
 .blockError {
-  padding: 5px;
   background-color: red;
 }
 

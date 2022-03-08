@@ -36,7 +36,7 @@
         <tr>
           <td>
             <div class="block" ladderType='o' draggable="true"><img src="/images/blocks/open.png">
-              <select name="select-simples-placeholder" class="ls-select">
+              <select   class="ls-select">
                 <% for(var i=0; i<inputs.length; i++) {%>
                   <option value="<%= inputs[i].port %>">
                     <%= inputs[i].name %>
@@ -57,7 +57,7 @@
           </td>
           <td>
             <div class="block" ladderType='c' draggable="true"><img src="/images/blocks/close.png">
-              <select name="select-simples-placeholder" class="ls-select">
+              <select   class="ls-select">
                 <% for(var i=0; i<inputs.length; i++) {%>
                   <option value="<%= inputs[i].port %>">
                     <%= inputs[i].name %>
@@ -78,7 +78,7 @@
           </td>
           <td>
             <div class="block" ladderType='p' draggable="true"><img src="/images/blocks/pulse.png">
-              <select name="select-simples-placeholder" class="ls-select">
+              <select   class="ls-select">
                 <% for(var i=0; i<inputs.length; i++) {%>
                   <option value="<%= inputs[i].port %>">
                     <%= inputs[i].name %>
@@ -101,7 +101,7 @@
         <tr>
           <td>
             <div class="block" ladderType='pd' draggable="true"><img src="/images/blocks/pulseDown.png">
-              <select name="select-simples-placeholder" class="ls-select">
+              <select   class="ls-select">
                 <% for(var i=0; i<inputs.length; i++) {%>
                   <option value="<%= inputs[i].port %>">
                     <%= inputs[i].name %>
@@ -122,7 +122,7 @@
           </td>
           <td>
             <div class="block" ladderType='pdc' draggable="true"><img src="/images/blocks/pulseDownClose.png">
-              <select name="select-simples-placeholder" class="ls-select">
+              <select   class="ls-select">
                 <% for(var i=0; i<inputs.length; i++) {%>
                   <option value="<%= inputs[i].port %>">
                     <%= inputs[i].name %>
@@ -143,7 +143,7 @@
           </td>
           <td>
             <div class="block" ladderType='pc' draggable="true"><img src="/images/blocks/pulseClose.png">
-              <select name="select-simples-placeholder" class="ls-select">
+              <select   class="ls-select">
                 <% for(var i=0; i<inputs.length; i++) {%>
                   <option value="<%= inputs[i].port %>">
                     <%= inputs[i].name %>
@@ -178,7 +178,7 @@
         <tr>
           <td>
             <div class="block coil" ladderType='coil' draggable="true"><img src="/images/blocks/coil.png">
-              <select name="select-simples-placeholder" class="ls-select">
+              <select   class="ls-select">
                 <% for(var i=0; i<outputs.length; i++) {%>
                   <option value="<%= outputs[i].port %>">
                     <%= outputs[i].name %>
@@ -189,7 +189,7 @@
           </td>
           <td>
             <div class="block coil" ladderType='scoil' draggable="true"><img src="/images/blocks/setCoil.png">
-              <select name="select-simples-placeholder" class="ls-select">
+              <select   class="ls-select">
                 <% for(var i=0; i<outputs.length; i++) {%>
                   <option value="<%= outputs[i].port %>">
                     <%= outputs[i].name %>
@@ -200,7 +200,7 @@
           </td>
           <td>
             <div class="block coil" ladderType='rcoil' draggable="true"><img src="/images/blocks/resetCoil.png">
-              <select name="select-simples-placeholder" class="ls-select">
+              <select   class="ls-select">
                 <% for(var i=0; i<outputs.length; i++) {%>
                   <option value="<%= outputs[i].port %>">
                     <%= outputs[i].name %>
@@ -213,7 +213,7 @@
         <tr>
           <td>
             <div class="block coil" ladderType='tcoil' draggable="true"><img src="/images/blocks/timeCoil.png">
-              <select name="select-simples-placeholder" class="ls-select">
+              <select   class="ls-select">
                 <% for(var i=0; i<20; i++) {%>
                   <option value="T<%= i %>">
                     T<%= i %>
@@ -446,6 +446,7 @@
             </td>
           </tr>
         </table>
+        <div id="addLine">ADICIONAR</div>
       </div>
     </div>
 
