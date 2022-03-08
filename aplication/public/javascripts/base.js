@@ -2,32 +2,73 @@ function log(message) {
     console.log(message)
 }
 var logs = ''
+var historico = ["", "", "", "", "", ""]
 const cards = document.querySelectorAll('.block')
 const dropzones = document.querySelectorAll('.dropzone')
 
+function reseteDrop() {
+    const cards = document.querySelectorAll('.block')
+    const dropzones = document.querySelectorAll('.dropzone')
+    cards.forEach(card => {
+        card.addEventListener('dragstart', dragstart)
+        card.addEventListener('drag', drag)
+        card.addEventListener('dragend', dragend)
+    })
+    dropzones.forEach(dropzone => {
+        dropzone.addEventListener('dragenter', dragenter)
+        dropzone.addEventListener('dragover', dragover)
+        dropzone.addEventListener('dragleave', dragleave)
+        dropzone.addEventListener('drop', drop)
+    })
+}
+var stringTr = ''
 $(document).ready(function () {
+    stringTr = $("#program tbody tr").html();
     //$('.ls-select').select2();
     //$('.ls-select').append('<option>teste</option>');
 
 });
+
+document.addEventListener('keydown', e => {
+    if ((e.ctrlKey && e.key === 's') || (e.ctrlKey && e.key === 'S')) {
+        e.preventDefault();
+        save()
+    }
+    if ((e.ctrlKey && e.key === 'z') || (e.ctrlKey && e.key === 'Z')) {
+        e.preventDefault();
+        $("#program").html(historico[0])
+        reseteDrop()
+        historico.shift()
+    }
+});
+
 
 const bConvert = document.getElementById('buttonConvert')
 bConvert.addEventListener('click', click => {
     compile()
 })
 
-const bSave = document.getElementById("save")
-bSave.addEventListener('click', click => {
-    var textos = $("#program").html()    
-    log(textos)
-    //$("#program").html(textos)
+const bAddLine = document.getElementById('addLine')
+bAddLine.addEventListener('click', click => {    
+    $("#program tbody").append("<tr>"+stringTr+"</tr>")
+    reseteDrop()
 })
 
-function erroLadder(elemento,mensagem){
+function save() {
+    compile()
+    var textos = $("#program").html()
+    $("#program").html(textos)
+    reseteDrop()
+}
+const bSave = document.getElementById("save")
+bSave.addEventListener('click', click => {
+    save()
+})
+
+function erroLadder(elemento, mensagem) {
     $('.logs').append(mensagem);
     elemento.parentElement.classList.add('blockError')
 }
-
 
 const bCopy = document.getElementById('buttonCopy')
 bCopy.addEventListener('click', click => {
@@ -39,9 +80,15 @@ bCopy.addEventListener('click', click => {
     window.getSelection().removeAllRanges();// to deselect
 })
 
-
-
 function compile() {
+
+    /*remove o todos os selecteds dos selects*/
+    var selecionados = document.querySelectorAll('option[selected="selected"]')
+    for (s = 0; s < selecionados.length; s++) {
+        selecionados[s].removeAttribute("selected")
+    }
+    /*remove o todos os selecteds dos selects*/
+
     var currentLine = 0
     var line = 0;
     var variaveis = ''
@@ -52,19 +99,17 @@ function compile() {
     var sets = []
     var times = []
     var lineString = ''
-    
+
     var lineWith = false;
     var someInterrupt = false;
     $('.logs').html("")
 
     function forLine(i, nj = 0) {
-
         colunas = tabela.rows[i].childNodes;
-
+        
         for (j = nj; j < colunas.length; j++) {
             //codeString += "j="+j+"-"+i+" - "
             elementos = colunas[j].childNodes;
-
             for (l = 3; l < 4; l++) {
                 try {
                     elementos[0].parentElement.classList.remove("blockError")
@@ -73,8 +118,7 @@ function compile() {
                     try {
                         var value = e[0].options[e[0].selectedIndex].value;
                         var name = e[0].options[e[0].selectedIndex].text;
-                        e[0].options[e[0].selectedIndex].setAttribute('selected','selected')
-                        log(e[0].options[e[0].selectedIndex])
+                        e[0].options[e[0].selectedIndex].setAttribute('selected', 'selected')
                         if (j == 1) {
                             lineString = "if(" + lineString
                         }
@@ -166,59 +210,60 @@ function compile() {
 
 
                     if (typeBlock == 'coil') {
-                        if (someInterrupt == false) {                            
-                            erroLadder(elementos[0],'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Saída " + value + " não possui nenhum acionamento")
+                        if (someInterrupt == false) {
+                            erroLadder(elementos[0], 'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Saída " + value + " não possui nenhum acionamento")
                         }
                         someInterrupt = false;
                         if (outs.indexOf(value) != -1) {
-                            erroLadder(elementos[0],'Erro na linha:' + (i + 1) + ' e coluna:6<br> Saída ' + value + ' ja foi usada anteriormente')                         
+                            erroLadder(elementos[0], 'Erro na linha:' + (i + 1) + ' e coluna:6<br> Saída ' + value + ' ja foi usada anteriormente')
                         } else {
                             lineString += "){<br> state" + value + " = 1;<br>}"
-                            
+
                         }
                         outs.push(value)
                     }
                     if (typeBlock == 'tcoil') {
                         if (someInterrupt == false) {
-                            erroLadder(elementos[0],'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Tempo " + value + " não possui nenhum acionamento")                            
+                            erroLadder(elementos[0], 'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Tempo " + value + " não possui nenhum acionamento")
                         }
                         someInterrupt = false;
                         if (times.indexOf(value) != -1) {
-                            erroLadder(elementos[0],'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Tempo " + value + " ja foi usada anteriormente")
+                            erroLadder(elementos[0], 'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Tempo " + value + " ja foi usada anteriormente")
                         } else {
                             var quanTenpo = elementos[3].querySelectorAll('input[type=number]')[0].value
                             lineString += "){<br> tempo" + value + " = 1;<br>}else{<br> tempocont" + value + " = millis() + " + quanTenpo + ";}<br>"
-                            
+
                         }
                         times.push(value)
                     }
 
                     if (typeBlock == 'scoil') {
                         if (someInterrupt == false) {
-                            erroLadder(elementos[0],'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Saída " + value + " não possui nenhum acionamento")
+                            erroLadder(elementos[0], 'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Saída " + value + " não possui nenhum acionamento")
                         }
                         someInterrupt = false;
                         if (outs.indexOf(value) != -1) {
-                            erroLadder(elementos[0],'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Saída " + value + " ja foi usada anteriormente")
+                            erroLadder(elementos[0], 'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Saída " + value + " ja foi usada anteriormente")
                         } else {
                             lineString += "){<br> state" + value + " = 1;<br>}"
-                            
+
                         }
                         sets.push(value)
                     }
                     if (typeBlock == 'rcoil') {
                         if (someInterrupt == false) {
-                            erroLadder(elementos[0],'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Saída " + value + " não possui nenhum acionamento")
+                            erroLadder(elementos[0], 'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Saída " + value + " não possui nenhum acionamento")
                         }
                         someInterrupt = false;
                         if (outs.indexOf(value) != -1) {
-                            erroLadder(elementos[0],'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Saída " + value + " ja foi usada anteriormente")
+                            erroLadder(elementos[0], 'Erro na linha:' + (i + 1) + ' e coluna:' + 6 + "<br> Saída " + value + " ja foi usada anteriormente")
                         } else {
                             lineString += "){<br> state" + value + " = 0;<br>}"
-                            
+
                         }
                         sets.push(value)
                     }
+
                 } catch (error) {
                     if ((j == 3 || j == 5 || j == 7 || j == 9) && lineWith == true) {
                         var blocoLinha = document.getElementById("l").cloneNode(true);
@@ -234,6 +279,7 @@ function compile() {
     }
 
     var tabela = document.getElementById('program');
+    
     var codeString = ''
     var variaveisOnLoop = ''
     var setup = 'void setup(){<br>Serial.begin(9600);<br>'
@@ -367,10 +413,21 @@ function drop() {
     if (this.getElementsByClassName('block').length > 0 || isCoil != canCoil) {
         log('não pode')
     } else {
+        saveHistory()
         this.appendChild(nodeCopy)
         this.classList.add('withBlock')
     }
 }
+
+function saveHistory() {
+    //salva historico
+    var textos = $("#program").html()
+    historico.unshift(textos)
+    if (historico.length > 6) {
+        historico.pop();
+    }
+}
+
 
 function removeBlock(este) {
     este.parentElement.classList.remove('withBlock')
