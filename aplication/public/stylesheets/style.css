@@ -210,6 +210,10 @@ input[type="number"] {
   background-color: red;
 }
 
+.over{
+  background-color: #1273cd5d;
+}
+
 /*scrool bar*/
 /* width */
 ::-webkit-scrollbar {
